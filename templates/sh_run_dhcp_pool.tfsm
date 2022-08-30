@@ -1,0 +1,36 @@
+Value Required POOL (\S+)
+Value NETWORK (\S+)
+Value MASK (\S+)
+Value GATEWAY (\S+)
+Value List DNS (\S+)
+Value BOOTFILE (\S+)
+Value List BOOTSERVER (\S+)
+Value DOMAIN (\S+)
+Value WLC (\S+)
+Value TFTP (\S+)
+Value TFTP_FILE (\S+)
+Value List CUCM (\S+)
+Value LEASE (.+)
+
+Start
+  ^ip dhcp pool -> Continue.Record
+  ^ip dhcp pool ${POOL}$$
+  ^ network ${NETWORK} ${MASK}$$
+  ^ bootfile ${BOOTFILE}$$
+  ^ next-server ${BOOTSERVER} -> Continue
+  ^ next-server \S+ ${BOOTSERVER} -> Continue
+  ^ next-server \S+ \S+ ${BOOTSERVER} -> Continue
+  ^ default-router ${GATEWAY}$$
+  ^ dns-server ${DNS} -> Continue
+  ^ dns-server \S+ ${DNS} -> Continue
+  ^ dns-server \S+ \S+ ${DNS} -> Continue
+  ^ dns-server \S+ \S+ \S+ ${DNS}
+  ^ domain-name ${DOMAIN}$$
+  ^ option 43 hex ${WLC}$$
+  ^ option 150 ip ${CUCM} -> Continue
+  ^ option 150 ip \S+ ${CUCM} -> Continue
+  ^ option 150 ip \S+ \S+ ${CUCM} -> Continue
+  ^ option 150 ip \S+ \S+ \S+ ${CUCM}
+  ^ option 66 ip ${TFTP}$$
+  ^ option 67 ascii ${TFTP_FILE}$$
+  ^ lease ${LEASE}$$

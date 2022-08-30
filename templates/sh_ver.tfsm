@@ -1,0 +1,17 @@
+Value HOSTNAME (\S+)
+Value VERSION (\S+)
+Value IMAGE (\S+)
+Value PLATFORM (\S+)
+Value UPTIME (.*)
+Value MAC (\S+)
+Value SN (\S+)
+Value REGISTER (\S+)
+
+Start
+  ^.*\), Version ${VERSION},
+  ^${HOSTNAME} uptime is ${UPTIME}
+  ^System image file is "${IMAGE}"
+  ^cisco ${PLATFORM} (\S+) processor
+  ^Processor board ID ${SN}
+  ^.*MAC Address\s*:\s*${MAC}
+  ^.*register is ${REGISTER} -> Record

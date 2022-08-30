@@ -1,0 +1,22 @@
+Value Required INTERFACE (\S+)
+Value DESCRIPTION (.*)
+Value ENCAPSULATION (\d+)
+Value IP (\S+)
+Value MASK (\S+)
+Value NAT (inside|outside|enable)
+Value ZONE (\S+)
+Value VRF (\S+)
+Value SHUTDOWN (shutdown)
+Value HELPER (\S+)
+
+Start
+  ^interface -> Continue.Record
+  ^interface ${INTERFACE}
+  ^ description ${DESCRIPTION}
+  ^ encapsulation dot1Q ${ENCAPSULATION}
+  ^ vrf forwarding ${VRF}
+  ^ ip address ${IP} ${MASK}
+  ^ ip helper-address ${HELPER}
+  ^ ip nat ${NAT}
+  ^ zone-member security ${ZONE}
+  ^ ${SHUTDOWN} -> Record
