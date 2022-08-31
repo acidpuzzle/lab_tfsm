@@ -9,5 +9,8 @@ def parse_output_to_dict(template, command_output):
 
 
 if __name__ == "__main__":
-    pass
+    with open("hua_cor_sw.config") as config:
+        ports = parse_output_to_dict("templates/disp_curr_interfa.tfsm", config.read())
 
+    for port in ports:
+        print(port)

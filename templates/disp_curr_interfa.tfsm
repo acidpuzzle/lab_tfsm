@@ -1,0 +1,13 @@
+Value Required intf_name (\S+)
+Value description (.+)
+Value alias (\S+)
+Value vrf (\S+)
+Value Required ip_address (\S+)
+Value Required net_mask (\S+)
+
+Start
+  ^interface\s+${intf_name} -> Continue.Record
+  ^\s+description\s+${description}$$
+  ^\s+ip binding vpn-instance\s${vrf}
+  ^\s+ip address\s+${ip_address}\s+${net_mask}
+  ^\s+alias\s+${alias}

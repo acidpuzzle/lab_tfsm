@@ -186,3 +186,6 @@ fabric.properties
 
 # Generatet excel report
 *.xlsx
+
+# Device configs
+*.config
